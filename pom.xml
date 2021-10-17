@@ -72,9 +72,9 @@
           <version>3.0.0</version>
         </plugin>
         <plugin>
-          <groupId>org.darkowl.bashDoc</groupId>
+          <groupId>io.github.randy-blancett</groupId>
           <artifactId>bashDoc-maven-plugin</artifactId>
-          <version>0.0.1-SNAPSHOT</version>
+          <version>1.0.1</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -101,7 +101,7 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.darkowl.bashDoc</groupId>
+        <groupId>io.github.randy-blancett</groupId>
         <artifactId>bashDoc-maven-plugin</artifactId>
         <executions>
           <execution>
