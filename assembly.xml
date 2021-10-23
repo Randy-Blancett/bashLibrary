@@ -9,9 +9,14 @@
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<fileSets>
 		<fileSet>
-			<directory>src/main/resources/bash/</directory>
+			<directory>target/bash/</directory>
 			<useDefaultExcludes>true</useDefaultExcludes>
 			<outputDirectory>./</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>target/doc/text</directory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory>./doc/text</outputDirectory>
 		</fileSet>
 	</fileSets>
 </assembly>
