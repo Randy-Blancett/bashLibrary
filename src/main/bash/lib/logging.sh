@@ -198,7 +198,7 @@ if [[ " ${LOADED_LIB[*]} " != *" logging.sh "* ]]; then
     addVar2Dump "LOG2FILE"
     addVar2Dump "VERBOSE"
     
-    addCommandLineArg "v" "verbose" true "Set the level of Logging ($STANDARD = STANDARD the higher the number the more data is output"
+    addCommandLineArg "v" "verbose" true "Set the level of Logging ($STANDARD = STANDARD the higher the number the more data is output)"
     addCommandLineArg "" "logFileDir" true "Set the Directory where log files are stored. Default: $LOG_DIR"
     addCommandLineArg "" "logFile" true "Set the File where data is logged to. Default: $LOG_FILE"
     addCommandLineArg "" "log2File" false "If this flag is set data will be logged to a file"
