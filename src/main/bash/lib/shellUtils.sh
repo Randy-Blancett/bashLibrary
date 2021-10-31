@@ -9,6 +9,8 @@
 # ensureDir: ensure that a given directory exists (create if needed)
 # copyDir: copy a directory to a new location
 # copyFile: Copy a file to a new location
+# ensureRoot: Ensure that running user is root
+# askUser: Ask user for input
 
 if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
     LOADED_LIB+=('shellUtils.sh')
@@ -46,8 +48,6 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	  	cp -r "$1" "$2"
 	}
 	
-		
-   
 	#METHOD
 	#PUBLIC
 	# Copy a given directory to a new location
@@ -62,5 +62,31 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 			log "$1 does not exist or is not a file so we can not copy it." $ERROR $TEXT_RED && \
 	  		return 1
 	  	cp "$1" "$2"
+	}
+	
+	
+	
+	#METHOD
+	#PUBLIC
+	# Ask User for input
+	#
+	#PARAMETERS
+	# $1 | Prompt | The prompt to place on the screen
+	# $2 | Variable | The name of the variable to store the response
+	function askUser
+	{
+		log "Asking the user [$1] and storeing it in [$2]" $INFO $TEXT_YELLOW
+		read -p "$1: " "$2"
+	}
+		
+	
+	#METHOD
+	#PUBLIC
+	# Ensure user is root or exit program
+	function ensureRoot
+	{
+		[ "$EUID" -ne 0 ] && \
+		  log "This script requires root privleges please rerun as root" "$ERROR" "$TEXT_RED" && \
+		  exit 1
 	}
 fi
