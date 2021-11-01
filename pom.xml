@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.randy-blancett</groupId>
   <artifactId>BashLibrary</artifactId>
-  <version>1.0.0</version>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Bash Library</name>
   <description>This project is a group of bash scripts that can act as a library to make
@@ -32,7 +32,7 @@
   <scm>
     <connection>scm:git:https://github.com/Randy-Blancett/bashLibrary.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/Randy-Blancett/bashLibrary.git</developerConnection>
-    <tag>1.0.0</tag>
+    <tag>HEAD</tag>
     <url>https://github.com/Randy-Blancett/bashLibrary</url>
   </scm>
   <distributionManagement>
