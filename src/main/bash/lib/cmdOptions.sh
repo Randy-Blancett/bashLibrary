@@ -2,10 +2,11 @@
 #FILE
 #AUTHOR Randy Blancett
 #AUTHOR_EMAIL Randy.Blancett@gmail.com
-#VERSION 0.0.1
+#VERSION 1.0.0
 # This library handles command line options
 #VERSIONS
-#V 0.0.1
+#V 1.0.0
+#RELEASE 01NOV2021
 # Handles ability to add command line arguments
 # Adds ability to output Help Menu
 #

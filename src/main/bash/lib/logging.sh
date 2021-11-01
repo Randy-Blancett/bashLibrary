@@ -2,11 +2,12 @@
 #FILE
 #AUTHOR Randy Blancett
 #AUTHOR_EMAIL Randy.Blancett@gmail.com
-#VERSION 0.0.1
+#VERSION 1.0.0
 # This library handles Logging of data
 #VERSIONS
-#V 0.0.1
-#
+#V 1.0.0
+#RELEASE 01NOV2021
+# Initial Release
 
 if [[ " ${LOADED_LIB[*]} " != *" logging.sh "* ]]; then
     LOADED_LIB+=('logging.sh')

@@ -1,7 +1,11 @@
 # Bash Library
 This package contains bash scripts that can be used as libraries in bash scripts
 
-# Usage
+## Deployment
+    mvn release:clean release:prepare
+    mvn release:perform  
+    
+## Usage
 Add the below to your Pom File this will copy the library files into the /target/bash folder
 
     <plugin>
@@ -31,8 +35,8 @@ Add the below to your Pom File this will copy the library files into the /target
         </executions>
       </plugin>
       
-# Versions
-## 1.0.0
-### Features
+## Versions
+### 1.0.0
+#### Features
 Initial release
-### Bugs
+#### Bugs

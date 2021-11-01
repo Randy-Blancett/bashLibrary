@@ -2,10 +2,11 @@
 #FILE
 #AUTHOR Randy Blancett
 #AUTHOR_EMAIL Randy.Blancett@gmail.com
-#VERSION 0.0.1
+#VERSION 1.0.0
 # This Library will add functions commonly used in shell scripts
 #VERSIONS
-#V 0.0.1
+#V 1.0.0
+#RELEASE 01NOV2021
 # ensureDir: ensure that a given directory exists (create if needed)
 # copyDir: copy a directory to a new location
 # copyFile: Copy a file to a new location
