@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.randy-blancett</groupId>
+  <artifactId>BashLibrary</artifactId>
+  <version>1.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Bash Library</name>
+  <description>This project is a group of bash scripts that can act as a library to make
+  creating bash scripts easier.</description>
+  <url>https://github.com/Randy-Blancett/bashLibrary</url>
+  <licenses>
+    <license>
+      <name>The MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>Randy.Blancett</id>
+      <name>Randy Blancett</name>
+      <email>Randy.Blancett@gmail.com</email>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>America/New_York</timezone>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/Randy-Blancett/bashLibrary.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/Randy-Blancett/bashLibrary.git</developerConnection>
+    <url>https://github.com/Randy-Blancett/bashLibrary</url>
+  </scm>
+  <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>

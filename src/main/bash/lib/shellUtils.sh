@@ -40,6 +40,10 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	#PARAMETERS
 	# $1 | Source | Directory to copy from
 	# $2 | Destination | Directory to copy to
+	#
+	#EXIT_CODES
+	# 0 | Executed successfully
+	# 1 | The input directory does not exist
 	function copyDir
 	{
 		log "Copying Directory [$1] to [$2]" $INFO $TEXT_GREEN
@@ -56,6 +60,10 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	#PARAMETERS
 	# $1 | Source | Directory to copy from
 	# $2 | Destination | Directory to copy to
+	#
+	#EXIT_CODES
+	# 0 | Executed successfully
+	# 1 | The input file does not exist
 	function copyFile
 	{
 		log "Copying Directory [$1] to [$2]" $INFO $TEXT_GREEN
@@ -84,6 +92,9 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	#METHOD
 	#PUBLIC
 	# Ensure user is root or exit program
+	#
+	#EXIT_CODES
+	# 1 | User does not have root privileges
 	function ensureRoot
 	{
 		[ "$EUID" -ne 0 ] && \
