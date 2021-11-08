@@ -51,6 +51,18 @@
     <maven.version>3.8.1</maven.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+ <repositories>
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>oss-snapshots-repo</id>
+      <url>https://s01.oss.sonatype.org/content/groups/public/</url>
+    </repository>
+  </repositories>
   <build>
     <pluginManagement>
       <plugins>
