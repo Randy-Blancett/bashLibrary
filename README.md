@@ -36,6 +36,14 @@ Add the below to your Pom File this will copy the library files into the /target
       </plugin>
       
 ## Versions
+### 1.1.0
+### 11NOV2021
+#### Features
+ * Added Shell Check
+ * Added shellUtilis.sh
+ * Updated Documentation
+ 
+#### Bugs
 ### 1.0.0
 #### Features
 Initial release

@@ -2,9 +2,13 @@
 #FILE
 #AUTHOR Randy Blancett
 #AUTHOR_EMAIL Randy.Blancett@gmail.com
-#VERSION 1.0.0
+#VERSION 1.1.0
 # This library handles command line options
 #VERSIONS
+#V 1.1.0
+#RELEASE 11NOV2021
+# Updated code to use ShellCheck suggested conventions
+#
 #V 1.0.0
 #RELEASE 01NOV2021
 # Handles ability to add command line arguments
