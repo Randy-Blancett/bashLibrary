@@ -47,7 +47,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
 
     CMD_GETOPT=getopt
 
-    CMD_SORT=sort
+    CMD_SORT="sort"
 
 	#METHOD
     #PUBLIC
@@ -65,19 +65,11 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
     # addCommandLineArg "h" "" "false" "This will show the Help Menu."
     function addCommandLineArg() {
         if [ "$3" = true ]; then
-            if [ -n "$1" ]; then
-                FLAGS+=$1:
-            fi
-            if [ -n "$2" ]; then
-                LONG_ARGS+=$2:,
-            fi
+            [ -n "$1" ] && FLAGS+="$1":
+            [ -n "$2" ] && LONG_ARGS+="$2:",
         else
-            if [ -n "$1" ]; then
-                FLAGS+=$1
-            fi
-            if [ -n "$2" ]; then
-                LONG_ARGS+=$2,
-            fi
+            [ -n "$1" ] && FLAGS+="$1"
+            [ -n "$2" ] && LONG_ARGS+="$2",
         fi
         COMMANDS_HELP+=("$1|$2|$4")
     }
@@ -111,10 +103,8 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         local OUTPUT
         for FLAG in "${COMMANDS[@]}"; do
             IFS='|' read -ra CMD <<<"$FLAG"
-            OUTPUT+= "${CMD[0]}"
-            if [ "${CMD[1]}" = true ]; then
-                OUTPUT+=":"
-            fi
+            OUTPUT+="${CMD[0]}"
+            [ "${CMD[1]}" = true ] && OUTPUT+=":"
         done
         echo $OUTPUT
     }
@@ -142,12 +132,10 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
     #EXAMPLES
     # parseCmdLine
     function parseCmdLine() {
-        OPTS=$($CMD_GETOPT -o $FLAGS --long $LONG_ARGS -n 'parse-options' -- "$@")
+        OPTS=$($CMD_GETOPT -o "${FLAGS[@]}" --long "${LONG_ARGS[@]}" -n 'parse-options' -- "$@") || \
+         validateFail "There is a problem with the Commands you passed in" 
+         
         NO_FLAG=0
-
-        if [ $? != 0 ]; then
-            echo "There is a problem with the Commands you passed in"
-        fi
 
         eval set -- "$OPTS"
 
@@ -157,7 +145,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
                 shift
                 continue
             fi
-            if [ -z $1 ]; then
+            if [ -z "$1" ]; then
                 break
             fi
             for PARSER in "${OPT_PARSERS[@]}"; do
@@ -218,11 +206,11 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         done
         COMMANDS_HELP=()
 
-        SORTED_LONG_FLAGS=($(
-            for KEY in "${!LONG_FLAGS[@]}"; do
+		mapfile -t SORTED_LONG_FLAGS < <( 
+	    	for KEY in "${!LONG_FLAGS[@]}"; do
                 echo "$KEY"
-            done | $CMD_SORT
-        ))
+            done | $CMD_SORT)
+	   
         for KEY in "${!SHORT_FLAGS[@]}"; do
             COMMANDS_HELP+=("${SHORT_FLAGS[$KEY]}")
         done
@@ -237,8 +225,8 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
     # This function will output the help menu, but should not be called directly
     function showCommandLineHelp() {
         organizeHelpCommands
-        printf " $DESC\n"
-        printf " Usage: $USAGE\n"
+        printf " %s\n" "$DESC"
+        printf " Usage: %s\n" "$USAGE"
         printf " OPTIONS:\n"
         for FLAG in "${COMMANDS_HELP[@]}"; do
             local SHORT=""
@@ -264,9 +252,9 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
     #PARAMETERS
     # $1 | Message | The exit message
     function validateFail() {
-        echo $1
+        echo "$1"
         showCommandLineHelp
-        exit 0
+        exit 1
     }
 
 	#METHOD

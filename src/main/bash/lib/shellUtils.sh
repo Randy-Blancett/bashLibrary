@@ -17,7 +17,7 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
     LOADED_LIB+=('shellUtils.sh')
     
     # Adds the base logging features
-    source $LIB_PATH/colorLogging.sh
+    source "$LIB_PATH/colorLogging.sh"
    
 	#METHOD
 	#PUBLIC
@@ -27,9 +27,9 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	# $1 | Directory | Directory to Check
 	function ensureDir
 	{
-		log "Ensure that Directory $1 exists" $INFO $TEXT_GREEN
+		log "Ensure that Directory $1 exists" "$INFO" "$TEXT_GREEN"
 		[ ! -d "$1" ] && \
-			log "$1 does not exist atempting to create." $DEBUG $TEXT_YELLOW && \
+			log "$1 does not exist atempting to create." "$DEBUG" "$TEXT_YELLOW" && \
 	  		mkdir -p "$1"
 	}	
    
@@ -46,9 +46,9 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	# 1 | The input directory does not exist
 	function copyDir
 	{
-		log "Copying Directory [$1] to [$2]" $INFO $TEXT_GREEN
+		log "Copying Directory [$1] to [$2]" "$INFO" "$TEXT_GREEN"
 		[ ! -d "$1" ] && \
-			log "$1 does not exist or is not a directory so we can not copy it." $ERROR $TEXT_RED && \
+			log "$1 does not exist or is not a directory so we can not copy it." "$ERROR" "$TEXT_RED" && \
 	  		return 1
 	  	cp -r "$1" "$2"
 	}
@@ -66,9 +66,9 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	# 1 | The input file does not exist
 	function copyFile
 	{
-		log "Copying Directory [$1] to [$2]" $INFO $TEXT_GREEN
+		log "Copying Directory [$1] to [$2]" "$INFO" "$TEXT_GREEN"
 		[ ! -f "$1" ] && \
-			log "$1 does not exist or is not a file so we can not copy it." $ERROR $TEXT_RED && \
+			log "$1 does not exist or is not a file so we can not copy it." "$ERROR" "$TEXT_RED" && \
 	  		return 1
 	  	cp "$1" "$2"
 	}
@@ -84,8 +84,8 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	# $2 | Variable | The name of the variable to store the response
 	function askUser
 	{
-		log "Asking the user [$1] and storeing it in [$2]" $INFO $TEXT_YELLOW
-		read -p "$1: " "$2"
+		log "Asking the user [$1] and storeing it in [$2]" "$INFO" "$TEXT_YELLOW"
+		read -r -p "$1: " "$2"
 	}
 		
 	

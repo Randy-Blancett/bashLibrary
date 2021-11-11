@@ -13,9 +13,9 @@ if [[ " ${LOADED_LIB[*]} " != *" colorLogging.sh "* ]]; then
     LOADED_LIB+=('colorLogging.sh')
     
     # Allow the library to parse command line options
-    source $LIB_PATH/cmdOptions.sh
+    source "$LIB_PATH"/cmdOptions.sh
     # Adds the base logging features
-    source $LIB_PATH/logging.sh
+    source "$LIB_PATH"/logging.sh
     
     #VARIABLE
     #PROTECTED
@@ -78,9 +78,9 @@ if [[ " ${LOADED_LIB[*]} " != *" colorLogging.sh "* ]]; then
     # log "This Message" $STANDARD $TEXT_RED
     function log()
     {
-    	if [ $2 -le $VERBOSE ]
+    	if [ "$2" -le "$VERBOSE" ]
     	then
-    		if [[ "ENABLE_COLOR" -eq 1 ]] && [[ ! -z "$3" ]]
+    		if [[ "ENABLE_COLOR" -eq 1 ]] && [[ -n "$3" ]]
     		then
     			echo -e "\e[${3}m${1}\e[0m"
     		else

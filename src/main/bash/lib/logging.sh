@@ -13,7 +13,7 @@ if [[ " ${LOADED_LIB[*]} " != *" logging.sh "* ]]; then
     LOADED_LIB+=('logging.sh')
     
     # Allow the library to parse command line options
-    source $LIB_PATH/cmdOptions.sh
+    source "$LIB_PATH/cmdOptions.sh"
     
     #VARIABLE
     #PROTECTED
@@ -104,22 +104,20 @@ if [[ " ${LOADED_LIB[*]} " != *" logging.sh "* ]]; then
     # varDump $INFO
     function varDump()
     {
-    	if [ $1 -le $VERBOSE ]
+    	if [ "$1" -le "$VERBOSE" ]
     	then
-	    	libDump $1
+	    	libDump "$1"
 	    	
-	    	SORTED_VAR_NAMES=( $(
-	    		for KEY in "${VAR_NAMES[@]}"
+	    	mapfile -t SORTED_VAR_NAMES < <( 
+	    	for KEY in "${VAR_NAMES[@]}"
 	    		do
 	    			echo "$KEY"
-	    		done | $CMD_SORT)    	)
+	    		done | $CMD_SORT)
 	    		
 			for VAR in "${SORTED_VAR_NAMES[@]}"
 			do
-				if [ -n "$VAR" ]
-				then
-					log "$(printf " %-30s %-55s \n" "$VAR:" "${!VAR}")" $1
-				fi
+				[ -n "$VAR" ] && \
+					log "$(printf " %-30s %-55s \n" "$VAR:" "${!VAR}")" "$1"
 			done
 		fi
     }
@@ -135,11 +133,11 @@ if [[ " ${LOADED_LIB[*]} " != *" logging.sh "* ]]; then
     # libDump $INFO
     function libDump()
     {
-    	if [ $1 -le $VERBOSE ]
+    	if [ "$1" -le "$VERBOSE" ]
     	then
     		for LIB in "${LOADED_LIB[@]}"
     		do 
-    			log "Loaded Library [$LIB]" $1 
+    			log "Loaded Library [$LIB]" "$1" 
     		done
     	fi    
     }
@@ -181,14 +179,9 @@ if [[ " ${LOADED_LIB[*]} " != *" logging.sh "* ]]; then
     # log "This Message" $STANDARD
     function log()
     {
-    	if [ $2 -le $VERBOSE ]
-    	then
-    		echo -e "$1"
-    		if [ "$LOG2FILE" = "1" ]
-    		then
-    			echo -e "$1" >> "${LOG_DIR}/${LOG_FILE}"
-    		fi
-    	fi    
+    	[ "$2" -le "$VERBOSE" ]&& \
+    		echo -e "$1" && \
+    		[ "$LOG2FILE" = "1" ]&& echo -e "$1" >> "${LOG_DIR}/${LOG_FILE}"  
     }
     
     ##############################################################
