@@ -65,11 +65,15 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
     # addCommandLineArg "h" "" "false" "This will show the Help Menu."
     function addCommandLineArg() {
         if [ "$3" = true ]; then
-            [ -n "$1" ] && FLAGS+="$1":
-            [ -n "$2" ] && LONG_ARGS+="$2:",
+        	# shellcheck disable=SC2179
+            [ -n "$1" ] && FLAGS+="$1:"
+        	# shellcheck disable=SC2179
+            [ -n "$2" ] && LONG_ARGS+="$2:,"
         else
+        	# shellcheck disable=SC2179
             [ -n "$1" ] && FLAGS+="$1"
-            [ -n "$2" ] && LONG_ARGS+="$2",
+        	# shellcheck disable=SC2179
+            [ -n "$2" ] && LONG_ARGS+="$2,"
         fi
         COMMANDS_HELP+=("$1|$2|$4")
     }

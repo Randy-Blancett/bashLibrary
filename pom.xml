@@ -190,18 +190,6 @@
               <failBuildIfWarnings>false</failBuildIfWarnings>
               <!-- chose the binary resolution method "embedded", "download" or "external" -->
               <binaryResolutionMethod>download</binaryResolutionMethod>
-              <!-- if you have chosen "download" as resolution method, you may also provide the url of the shellcheck
-                              release archive (zip or tar.xz) (for all os/arch you're building on) to be used at plugin execution time.
-                              The urls are specified as a configuration map, where the exact key for an architecture 
-                              (e.g. "Mac_OS_X-x86_64" in the example below) must match what your jvm returns for the 
-                              following expression:
-                              (System.getProperty("os.name") + "-" + System.getProperty("os.arch")).replace(" ", "_")
-                              For your convenience this value is also printed by the plugin almost at start:
-                              e.g. "[INFO] os arch: [Mac_OS_X-x86_64]"
-                              If you don't provide this configuration map at all (or if you don't provide an exact match
-                              to osname-arch as described above) the same url that was used to 
-                              fetch the embedded binaries will be used instead. However, at that point
-                              you may as well use the embedded binaries -->
               <releaseArchiveUrls>
                 <Linux-amd64>https://github.com/koalaman/shellcheck/releases/download/v0.7.2/shellcheck-v0.7.2.linux.x86_64.tar.xz</Linux-amd64>
               </releaseArchiveUrls>
