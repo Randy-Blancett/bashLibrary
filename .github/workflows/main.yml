@@ -26,6 +26,7 @@ jobs:
       with:
           sh_checker_comment: true
           sh_checker_shfmt_disable: true
+          sh_checker_exclude: "src/test/*"
     
     - name: Set up multi JDK
       uses: actions/setup-java@v2
