@@ -18,6 +18,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    - name: Run the sh-checker
+      uses: luizm/action-sh-checker@master
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHELLCHECK_OPTS: -e SC1004 # exclude some shellcheck warnings.
+          SHFMT_OPTS: -s # arguments to shfmt.
+      with:
+          sh_checker_comment: true
+          sh_checker_exclude: ".terraform ^dir/example.sh"
+    
     - name: Set up multi JDK
       uses: actions/setup-java@v2
       with:
@@ -27,3 +37,5 @@ jobs:
         
     - name: Build with Maven
       run: mvn -B clean package --file pom.xml  
+      
+      
