@@ -22,11 +22,11 @@ jobs:
       uses: luizm/action-sh-checker@master
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SHELLCHECK_OPTS: -e SC1091 -e SC2034 -s -a --format=tty --norc # exclude some shellcheck warnings.
+          SHELLCHECK_OPTS: -e SC1091 -e SC2034 -s --format=tty --norc # exclude some shellcheck warnings.
           SHFMT_OPTS: -s # arguments to shfmt.
       with:
           sh_checker_comment: true
-          sh_checker_exclude: ".terraform ^dir/example.sh"
+          sh_checker_shfmt_disable: true
     
     - name: Set up multi JDK
       uses: actions/setup-java@v2
