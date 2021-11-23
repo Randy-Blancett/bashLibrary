@@ -22,8 +22,7 @@ jobs:
       uses: luizm/action-sh-checker@master
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SHELLCHECK_OPTS: -e SC1091 -e SC2034 -s # exclude some shellcheck warnings.
-          SHFMT_OPTS: -s # arguments to shfmt.
+          SHELLCHECK_OPTS: -e SC1091 -e SC2034 # exclude some shellcheck warnings.
       with:
           sh_checker_comment: true
           sh_checker_shfmt_disable: true
