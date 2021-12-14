@@ -43,9 +43,9 @@ jobs:
 #      with:
 #          cli-args:             "target target/test-bash/testRunner.sh"
           
-    - name: run my tests
-      uses: sudo-bot/action-shunit2@latest
-      with:
-          cli: "kcov target/coverage target/test-bash/testRunner.sh"
+#    - name: run my tests
+#      uses: sudo-bot/action-shunit2@latest
+#      with:
+#          cli: "kcov target/coverage target/test-bash/testRunner.sh"
       
       
