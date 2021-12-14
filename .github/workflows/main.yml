@@ -46,6 +46,6 @@ jobs:
     - name: run my tests
       uses: sudo-bot/action-shunit2@latest
       with:
-          cli: "kcov target/coverage target/test-bash/shellUtilsTest.sh"
+          cli: "kcov target/coverage target/test-bash/testRunner.sh"
       
       
