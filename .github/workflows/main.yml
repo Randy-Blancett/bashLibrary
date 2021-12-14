@@ -39,7 +39,7 @@ jobs:
       run: mvn -B clean package --file pom.xml  
       
     - name: get kcov version
-      uses: sudo-bot/action-kcov@latest
+      uses: crubalcaba/kcov-action@v1
       with:
           cli-args: "target/coverage target/test-bash/shellUtilsTest.sh"
           
