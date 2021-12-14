@@ -53,14 +53,14 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
 
     CMD_SORT="sort"
 
-	#METHOD
+    #METHOD
     #PUBLIC
     # This Function will add an argument to look for on the command line
     #
     #PARAMETERS
     # $1 | Flag | This is the one character flag the parser will look for if there is no flag enter ""
     # $2 | Long Command | This is the multi-character flag it will look for if you do not want a long option pass ""
-    # $3 | Has Arguments | if true the flag will loof for dat to be passed
+    # $3 | Has Arguments | if true the flag will look for data to be passed
     # $4 | Help | This is the help message that will be displayed for the option
     #
     #EXAMPLES
@@ -69,20 +69,20 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
     # addCommandLineArg "h" "" "false" "This will show the Help Menu."
     function addCommandLineArg() {
         if [ "$3" = true ]; then
-        	# shellcheck disable=SC2179
+            # shellcheck disable=SC2179
             [ -n "$1" ] && FLAGS+="$1:"
-        	# shellcheck disable=SC2179
+            # shellcheck disable=SC2179
             [ -n "$2" ] && LONG_ARGS+="$2:,"
         else
-        	# shellcheck disable=SC2179
+            # shellcheck disable=SC2179
             [ -n "$1" ] && FLAGS+="$1"
-        	# shellcheck disable=SC2179
+            # shellcheck disable=SC2179
             [ -n "$2" ] && LONG_ARGS+="$2,"
         fi
         COMMANDS_HELP+=("$1|$2|$4")
     }
 
-	#METHOD
+    #METHOD
     #PUBLIC
     # This function will add a function to parse command options "Command" the name of the command to run (Needs to be Globaly Unique)
     #
@@ -117,8 +117,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         echo $OUTPUT
     }
 
-
-	#METHOD
+    #METHOD
     #PRIVATE
     # This function will parse the command line options but should not be called directly
     #PARAMETERS
@@ -133,16 +132,16 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         esac
     }
 
-	#METHOD
+    #METHOD
     #PUBLIC
     # This function will parse the parameters passed in and call the parser functions
     #
     #EXAMPLES
     # parseCmdLine
     function parseCmdLine() {
-        OPTS=$($CMD_GETOPT -o "${FLAGS[@]}" --long "${LONG_ARGS[@]}" -n 'parse-options' -- "$@") || \
-         validateFail "There is a problem with the Commands you passed in" 
-         
+        OPTS=$($CMD_GETOPT -o "${FLAGS[@]}" --long "${LONG_ARGS[@]}" -n 'parse-options' -- "$@") ||
+            validateFail "There is a problem with the Commands you passed in"
+
         NO_FLAG=0
 
         eval set -- "$OPTS"
@@ -170,7 +169,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         done
     }
 
-	#METHOD
+    #METHOD
     #PUBLIC
     # This function will set the description of the Script to be displayed in the help
     #
@@ -183,7 +182,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         DESC=$1
     }
 
-	#METHOD
+    #METHOD
     #PUBLIC
     # This function will set the usage to be displayed on the help menu
     #
@@ -196,7 +195,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         USAGE=$1
     }
 
-	#METHOD
+    #METHOD
     #PROTECTED
     # This function will sort the help command into all commands with one letter flag then multi letter flags in alphabetic order
     function organizeHelpCommands() {
@@ -214,11 +213,12 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         done
         COMMANDS_HELP=()
 
-		mapfile -t SORTED_LONG_FLAGS < <( 
-	    	for KEY in "${!LONG_FLAGS[@]}"; do
+        mapfile -t SORTED_LONG_FLAGS < <(
+            for KEY in "${!LONG_FLAGS[@]}"; do
                 echo "$KEY"
-            done | $CMD_SORT)
-	   
+            done | $CMD_SORT
+        )
+
         for KEY in "${!SHORT_FLAGS[@]}"; do
             COMMANDS_HELP+=("${SHORT_FLAGS[$KEY]}")
         done
@@ -228,7 +228,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         done
     }
 
-	#METHOD
+    #METHOD
     #PROTECTED
     # This function will output the help menu, but should not be called directly
     function showCommandLineHelp() {
@@ -250,7 +250,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         done
     }
 
-	#METHOD
+    #METHOD
     #PUBLIC
     # This method should be called from the validateOptions function if it does not pass
     #
@@ -265,7 +265,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         exit 1
     }
 
-	#METHOD
+    #METHOD
     #PUBLIC
     # This function will run all the validation functions
     #
@@ -278,7 +278,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
             fi
         done
     }
-    
+
     ##############################################################
     # Library Setup                                              #
     ##############################################################

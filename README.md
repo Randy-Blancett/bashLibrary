@@ -36,6 +36,10 @@ Add the below to your Pom File this will copy the library files into the /target
       </plugin>
       
 ## Versions
+### 1.2.0
+#### Features
+ * Updated Documentation
+
 ### 1.1.0
 ### 11NOV2021
 #### Features

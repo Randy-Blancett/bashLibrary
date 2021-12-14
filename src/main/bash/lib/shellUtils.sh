@@ -18,25 +18,24 @@
 # askUser: Ask user for input
 
 if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
-    LOADED_LIB+=('shellUtils.sh')
-    
-    # Adds the base logging features
-    source "$LIB_PATH/colorLogging.sh"
-   
+	LOADED_LIB+=('shellUtils.sh')
+
+	# Adds the base logging features
+	source "$LIB_PATH/colorLogging.sh"
+
 	#METHOD
 	#PUBLIC
 	# Check if a given directory exists, if not it will create it
 	#
 	#PARAMETERS
 	# $1 | Directory | Directory to Check
-	function ensureDir
-	{
+	function ensureDir {
 		log "Ensure that Directory $1 exists" "$INFO" "$TEXT_GREEN"
-		[ ! -d "$1" ] && \
-			log "$1 does not exist atempting to create." "$DEBUG" "$TEXT_YELLOW" && \
-	  		mkdir -p "$1"
-	}	
-   
+		[ ! -d "$1" ] &&
+			log "$1 does not exist atempting to create." "$DEBUG" "$TEXT_YELLOW" &&
+			mkdir -p "$1"
+	}
+
 	#METHOD
 	#PUBLIC
 	# Copy a given directory to a new location
@@ -48,15 +47,14 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	#EXIT_CODES
 	# 0 | Executed successfully
 	# 1 | The input directory does not exist
-	function copyDir
-	{
+	function copyDir {
 		log "Copying Directory [$1] to [$2]" "$INFO" "$TEXT_GREEN"
-		[ ! -d "$1" ] && \
-			log "$1 does not exist or is not a directory so we can not copy it." "$ERROR" "$TEXT_RED" && \
-	  		return 1
-	  	cp -r "$1" "$2"
+		[ ! -d "$1" ] &&
+			log "$1 does not exist or is not a directory so we can not copy it." "$ERROR" "$TEXT_RED" &&
+			return 1
+		cp -r "$1" "$2"
 	}
-	
+
 	#METHOD
 	#PUBLIC
 	# Copy a given directory to a new location
@@ -68,17 +66,14 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	#EXIT_CODES
 	# 0 | Executed successfully
 	# 1 | The input file does not exist
-	function copyFile
-	{
+	function copyFile {
 		log "Copying Directory [$1] to [$2]" "$INFO" "$TEXT_GREEN"
-		[ ! -f "$1" ] && \
-			log "$1 does not exist or is not a file so we can not copy it." "$ERROR" "$TEXT_RED" && \
-	  		return 1
-	  	cp "$1" "$2"
+		[ ! -f "$1" ] &&
+			log "$1 does not exist or is not a file so we can not copy it." "$ERROR" "$TEXT_RED" &&
+			return 1
+		cp "$1" "$2"
 	}
-	
-	
-	
+
 	#METHOD
 	#PUBLIC
 	# Ask User for input
@@ -86,23 +81,21 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	#PARAMETERS
 	# $1 | Prompt | The prompt to place on the screen
 	# $2 | Variable | The name of the variable to store the response
-	function askUser
-	{
+	function askUser {
 		log "Asking the user [$1] and storeing it in [$2]" "$INFO" "$TEXT_YELLOW"
 		read -r -p "$1: " "$2"
 	}
-		
-	
+
 	#METHOD
 	#PUBLIC
 	# Ensure user is root or exit program
 	#
 	#EXIT_CODES
+	# 0 | User Has Root Privileges
 	# 1 | User does not have root privileges
-	function ensureRoot
-	{
-		[ "$EUID" -ne 0 ] && \
-		  log "This script requires root privleges please rerun as root" "$ERROR" "$TEXT_RED" && \
-		  exit 1
+	function ensureRoot {
+		[ "$EUID" -ne 0 ] &&
+			log "This script requires root privleges please rerun as root" "$ERROR" "$TEXT_RED" &&
+			exit 1
 	}
 fi
