@@ -42,5 +42,10 @@ jobs:
       uses: sudo-bot/action-kcov@latest
       with:
           cli-args: "--version"
+          
+    - name: run my tests
+      uses: sudo-bot/action-shunit2@latest
+      with:
+          cli: "kcov ./build/coverage ./target/test-bash/shellUtilsTest.sh"
       
       
