@@ -38,10 +38,10 @@ jobs:
     - name: Build with Maven
       run: mvn -B clean package --file pom.xml  
       
-    - name: get kcov version
-      uses: crubalcaba/kcov-action@v1
-      with:
-          cli-args: "target/coverage target/test-bash/shellUtilsTest.sh"
+#    - name: get kcov version
+#      uses: crubalcaba/kcov-action@v1
+#      with:
+#          cli-args:             "target target/test-bash/testRunner.sh"
           
     - name: run my tests
       uses: sudo-bot/action-shunit2@latest
