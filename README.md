@@ -39,6 +39,7 @@ Add the below to your Pom File this will copy the library files into the /target
 ### 1.2.0
 #### Features
  * Updated Documentation
+ * Added ShUnit for testing / code quality
 
 ### 1.1.0
 ### 11NOV2021
