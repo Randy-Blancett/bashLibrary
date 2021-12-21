@@ -45,11 +45,16 @@
     </snapshotRepository>
   </distributionManagement>
   <properties>
+    <bats>${bats.dir}/bin/bats</bats>
+    <bats.dir>${project.basedir}/target/bats-core</bats.dir>
+    <bats.zip.name>bats-core.tar.gz</bats.zip.name>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <maven.plugin.version>3.2.0</maven.plugin.version>
     <maven.version>3.8.1</maven.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <shUnit2>${project.basedir}/target/shunit2-2.1.8/shunit2</shUnit2>
+    <test.libDir>${project.basedir}/target/bash/lib</test.libDir>
   </properties>
   <repositories>
     <repository>
@@ -81,7 +86,7 @@
         <plugin>
           <groupId>dev.dimlight</groupId>
           <artifactId>shellcheck-maven-plugin</artifactId>
-          <version>0.3.1</version>
+          <version>0.4.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -119,6 +124,11 @@
           <version>${maven.plugin.version}</version>
         </plugin>
         <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>3.0.0-M1</version>
@@ -144,6 +154,11 @@
           <version>3.0.0</version>
         </plugin>
         <plugin>
+          <groupId>com.googlecode.maven-download-plugin</groupId>
+          <artifactId>download-maven-plugin</artifactId>
+          <version>1.6.7</version>
+        </plugin>
+        <plugin>
           <groupId>io.github.randy-blancett</groupId>
           <artifactId>bashDoc-maven-plugin</artifactId>
           <version>1.3.0-SNAPSHOT</version>
@@ -156,6 +171,54 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <configuration>
+          <workingDirectory>${project.basedir}/target/test-bash/</workingDirectory>
+          <executable>${project.basedir}/target/test-bash/testRunner.sh</executable>
+        </configuration>
+        <executions>
+          <execution>
+            <id>bash-tests</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>test</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>install shUnit2</id>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <phase>process-test-resources</phase>
+            <configuration>
+              <url>https://github.com/kward/shunit2/archive/refs/tags/v2.1.8.tar.gz</url>
+              <unpack>true</unpack>
+              <outputDirectory>${project.basedir}/target/</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install Bats-core</id>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <phase>process-test-resources</phase>
+            <configuration>
+              <url>https://github.com/bats-core/bats-core/archive/refs/tags/v1.5.0.tar.gz</url>
+              <unpack>false</unpack>
+              <outputFileName>${bats.zip.name}</outputFileName>
+              <outputDirectory>${project.basedir}/target/</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>dev.dimlight</groupId>
         <artifactId>shellcheck-maven-plugin</artifactId>
@@ -236,6 +299,22 @@
               <resources>
                 <resource>
                   <directory>src/main/bash</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-test-resources</id>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <phase>process-test-resources</phase>
+            <configuration>
+              <outputDirectory>${basedir}/target/test-bash</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/test/bash</directory>
                   <filtering>true</filtering>
                 </resource>
               </resources>
