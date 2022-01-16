@@ -40,6 +40,7 @@ Add the below to your Pom File this will copy the library files into the /target
 #### Features
  * Updated Documentation
  * Added ShUnit for testing / code quality
+ * Added Ability to load properties (properties.sh)
 
 ### 1.1.0
 ### 11NOV2021
