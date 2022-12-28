@@ -95,6 +95,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
         OPT_PARSERS+=("$1")
     }
 
+    #METHOD
     #PUBLIC
     # This will add a function used to validate options
     #
@@ -102,7 +103,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
     # $1 | Validator Command | This is the name of the function that will parse the command (Needs to be Globaly Unique)
     #
     #EXAMPLES
-    # addOPtionValidator "ValidatorFunctionName"
+    # addOptionValidator "ValidatorFunctionName"
     function addOptionValidator() {
         OPT_VALIDATORS+=("$1")
     }
