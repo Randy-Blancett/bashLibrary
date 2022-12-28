@@ -94,8 +94,21 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	# 0 | User Has Root Privileges
 	# 1 | User does not have root privileges
 	function ensureRoot {
-		[ "$EUID" -ne 0 ] &&
-			log "This script requires root privleges please rerun as root" "$ERROR" "$TEXT_RED" &&
+		isRoot ||
+			log "This script requires root privleges please rerun as root" "$ERROR" "$TEXT_RED" ||
 			exit 1
 	}
+
+	#METHOD
+	#PUBLIC
+	# Check if user is root
+	#
+	#RETURN
+	# 0 | User Has Root Privileges
+	# 1 | User does not have root privileges
+	function isRoot {
+		[ "$EUID" -ne 0 ] && return 1 || return 0
+	}
+
+
 fi
