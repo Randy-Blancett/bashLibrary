@@ -88,6 +88,36 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 
 	#METHOD
 	#PUBLIC
+	# Check if user Exists
+	#
+	#PARAMETERS
+	# $1 | Username | The Name of the user to check
+	#
+	#EXIT_CODES
+	# 0 | User Exists
+	# 1 | User does not Exist
+	function userExists {
+		log "Check if $1 exists" "$DEBUG" 
+		id "$1" &>/dev/null && return 0 || return 1
+	}
+
+	#METHOD
+	#PUBLIC
+	# Ensure the given user exists
+	#
+	#PARAMETERS
+	# $1 | Username | The Name of the user to check
+	function ensureUser {
+		log "Ensureing $1 Exists" "$DEBUG" 
+		# shellcheck disable=SC2015
+		userExists "$1" && 
+		    log "$1 Exists" "${TRACE}" ||
+			( log "$1 Does not Exist trying to create it." "${TRACE}" &&
+			useradd "$1" )
+	}
+
+	#METHOD
+	#PUBLIC
 	# Ensure user is root or exit program
 	#
 	#EXIT_CODES
