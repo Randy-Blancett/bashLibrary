@@ -109,10 +109,10 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	# $1 | Username | The Name of the user to check
 	function ensureUser {
 		log "Ensureing $1 Exists" "$DEBUG" 
-
+		# shellcheck disable=SC2015
 		userExists "$1" && 
-		    log "$1 Exists" ${TRACE}||
-			( log "$1 Does not Exist trying to create it." ${TRACE} &&
+		    log "$1 Exists" "${TRACE}" ||
+			( log "$1 Does not Exist trying to create it." "${TRACE}" &&
 			useradd "$1" )
 	}
 
