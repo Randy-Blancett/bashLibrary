@@ -81,9 +81,19 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	#PARAMETERS
 	# $1 | Prompt | The prompt to place on the screen
 	# $2 | Variable | The name of the variable to store the response
+	# $3 | Default | The default response if none is provided | optional
 	function askUser {
-		log "Asking the user [$1] and storeing it in [$2]" "$INFO" "$TEXT_YELLOW"
-		read -r -p "$1: " "$2"
+		local PROMPT
+		if [ -z "$3" ]; then
+			PROMPT="$1"
+		else
+			PROMPT="$1 [$3]"
+		fi
+		
+		log "Asking the user [$PROMPT] and storing it in [$2]" "$INFO" "$TEXT_YELLOW"
+		local RESPONSE
+		read -r -p "$PROMPT: " "RESPONSE"
+		printf -v "$2" '%s' "${RESPONSE:-$3}"
 	}
 
 	#METHOD
