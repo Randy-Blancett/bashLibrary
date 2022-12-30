@@ -5,6 +5,13 @@
 #VERSION 1.1.0
 # This Library will add functions commonly used in shell scripts
 #VERSIONS
+#V 1.2.0
+#RELEASE 
+# Added Ability to check if username exists
+# Added Ability to check if Group Exists
+# Added Ability to check for root with out exiting program
+# Added ability to have a default value when asking a user for input
+#
 #V 1.1.0
 #RELEASE 11NOV2021
 # Updated code to use ShellCheck suggested conventions
