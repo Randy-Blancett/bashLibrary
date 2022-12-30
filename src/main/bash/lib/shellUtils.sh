@@ -11,6 +11,7 @@
 # Added Ability to check if Group Exists
 # Added Ability to check for root with out exiting program
 # Added ability to have a default value when asking a user for input
+# Added Ability to check if a given group exists
 #
 #V 1.1.0
 #RELEASE 11NOV2021
@@ -116,6 +117,21 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	function userExists {
 		log "Check if $1 exists" "$DEBUG" 
 		id "$1" &>/dev/null && return 0 || return 1
+	}
+
+	#METHOD
+	#PUBLIC
+	# Check if a Group Exists on the machine
+	#
+	#PARAMETERS
+	# $1 | Group | The Name of the group to check
+	#
+	#EXIT_CODES
+	# 0 | Group Exists
+	# 1 | Group does not Exist
+	function groupExists {
+		log "Check if $1 exists" "$DEBUG" 
+		getent group $1 &>/dev/null && return 0 ||return 1 
 	}
 
 	#METHOD

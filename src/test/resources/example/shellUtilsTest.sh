@@ -18,4 +18,7 @@ log "User Said: ${USER_INPUT}" "${STANDARD}"
 isRoot && echo "Am Root" || echo "Not Root"
 ensureUser "darkowl1234"
 
+groupExists noGroup && echo Group exists || echo group not exist
+
+
 ensureRoot

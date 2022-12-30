@@ -44,3 +44,13 @@ teardown() {
     askUser "testPrompt" "USER_INPUT" "GoodBye" <<< ""
     [ "$USER_INPUT" = "GoodBye" ]
 }
+
+@test "groupExists" {
+    run groupExists noGroup
+    [ "$status" = "1" ] 
+    [ "$output" = "" ] 
+    run groupExists root
+    [ "$status" = "0" ] 
+    echo $output
+    [ "$output" = "" ] 
+}
