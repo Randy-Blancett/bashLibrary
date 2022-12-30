@@ -35,3 +35,12 @@ teardown() {
     userExists "$USER" && data=1 || data=0
     [ "$data" = "1" ]   
 }
+
+@test "askUser" {
+    local USER_INPUT=""
+    askUser "testPrompt" "USER_INPUT" <<< "hello"
+    [ "$USER_INPUT" = "hello" ]
+    USER_INPUT=""
+    askUser "testPrompt" "USER_INPUT" "GoodBye" <<< ""
+    [ "$USER_INPUT" = "GoodBye" ]
+}
