@@ -131,7 +131,7 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	# 1 | Group does not Exist
 	function groupExists {
 		log "Check if $1 exists" "$DEBUG" 
-		getent group $1 &>/dev/null && return 0 ||return 1 
+		getent group "$1" &>/dev/null && return 0 ||return 1 
 	}
 
 	#METHOD
