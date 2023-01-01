@@ -21,6 +21,9 @@ ensureUser "darkowl1234"
 groupExists noGroup && echo Group exists || echo group not exist
 
 ensureGroup "root"
-
-
+echo ""
+userInGroup "root" "root" && echo "Is a member" || echo " Is not a member"
+userInGroup "darkowl" "root" && echo "Is a member" || echo " Is not a member"
+echo ""
+ensureUserInGroup "root" "root"
 ensureRoot
