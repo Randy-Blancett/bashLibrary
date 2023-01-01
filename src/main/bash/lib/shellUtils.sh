@@ -12,6 +12,7 @@
 # Added Ability to check for root with out exiting program
 # Added ability to have a default value when asking a user for input
 # Added Ability to check if a given group exists
+# Add Ability to ensure that a given group exists
 #
 #V 1.1.0
 #RELEASE 11NOV2021
@@ -132,6 +133,21 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	function groupExists {
 		log "Check if $1 exists" "$DEBUG" 
 		getent group "$1" &>/dev/null && return 0 ||return 1 
+	}
+
+	#METHOD
+	#PUBLIC
+	# Ensure the given Group exists
+	#
+	#PARAMETERS
+	# $1 | Group | The Name of the group to check
+	function ensureGroup {
+		log "Ensureing $1 Exists" "$DEBUG" 
+		# shellcheck disable=SC2015
+		groupExists "$1" && 
+		    log "$1 Exists" "${TRACE}" || \
+			( log "$1 Does not Exist trying to create it." "${TRACE}" && \
+			groupadd "$1" )
 	}
 
 	#METHOD

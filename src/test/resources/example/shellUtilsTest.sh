@@ -20,5 +20,7 @@ ensureUser "darkowl1234"
 
 groupExists noGroup && echo Group exists || echo group not exist
 
+ensureGroup "root"
+
 
 ensureRoot
