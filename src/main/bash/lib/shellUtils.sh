@@ -11,6 +11,10 @@
 # Added Ability to check if Group Exists
 # Added Ability to check for root with out exiting program
 # Added ability to have a default value when asking a user for input
+# Added Ability to check if a given group exists
+# Added Ability to ensure that a given group exists
+# Added Ability to Check if a user is a member of a given group
+# Added Ability to Ensure user is a member of a given Group
 #
 #V 1.1.0
 #RELEASE 11NOV2021
@@ -116,6 +120,87 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	function userExists {
 		log "Check if $1 exists" "$DEBUG" 
 		id "$1" &>/dev/null && return 0 || return 1
+	}
+
+	#METHOD
+	#PUBLIC
+	# Check if a Group Exists on the machine
+	#
+	#PARAMETERS
+	# $1 | Group | The Name of the group to check
+	#
+	#EXIT_CODES
+	# 0 | Group Exists
+	# 1 | Group does not Exist
+	function groupExists {
+		log "Check if $1 exists" "$DEBUG" 
+		getent group "$1" &>/dev/null && return 0 ||return 1 
+	}
+
+	#METHOD
+	#PUBLIC
+	# Ensure the given Group exists
+	#
+	#PARAMETERS
+	# $1 | Group | The Name of the group to check
+	function ensureGroup {
+		log "Ensureing $1 Exists" "$DEBUG" 
+		# shellcheck disable=SC2015
+		groupExists "$1" && 
+		    log "$1 Exists" "${TRACE}" || \
+			( log "$1 Does not Exist trying to create it." "${TRACE}" && \
+			groupadd "$1" )
+	}
+
+	#METHOD
+	#PUBLIC
+	# Make sure a given user exists and is a member of group.
+	# This makes sure user exists if not it will create it.
+	# This makes suer Group exists if not it will create it.
+	#
+	#PARAMETERS
+	# $1 | Username | The name of the user to add to the group.
+	# $2 | Group | The name of the group to add to the user to.
+	function ensureUserInGroup {
+		log "Ensure $1 is a member of group $2" "$DEBUG" 
+		ensureGroup "$2"
+		ensureUser "$1"
+		if userInGroup "$1" "$2"
+		then
+			log "$1 is a member of Group $2" "$TRACE" 
+		else
+			usermod -a -G "$2" "$1"
+		fi
+	}
+
+	#METHOD
+	#PUBLIC
+	# Check if a user is a member of the given group
+	#
+	#PARAMETERS
+	# $1 | Username | The name of the user to add to the group.
+	# $2 | Group | The name of the group to add to the user to.
+	#
+	#EXIT_CODES
+	# 0 | User is a member of a given group.
+	# 1 | User is not a member of a given group.
+	function userInGroup {
+		log "Checking if $1 is a member of group $2" "$DEBUG" 
+		if userExists "$1"
+		then
+			log "$1 is a valid User" "$DEBUG" 
+		else
+			log "$1 is not a valid User" "$DEBUG" 
+			return 1
+		fi
+		if id -nGz "$1" | grep -qzxF "$2"
+		then
+			log "$1 is a member of group $2" "$DEBUG" 
+			return 0
+		else
+			log "$1 is not a member of group $2" "$DEBUG" 
+			return 1
+		fi
 	}
 
 	#METHOD
