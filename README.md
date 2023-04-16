@@ -59,3 +59,16 @@ Add the below to your Pom File this will copy the library files into the /target
 #### Features
 Initial release
 #### Bugs
+
+# Developer Setup
+## Setup PGP Signature
+1) Install GnuPG
+  * 
+    ``` shell
+    sudo apt install gnupg
+    ```
+2) Generate a Key
+  *
+    ``` shell
+    gpg --gen-key
+    ```
