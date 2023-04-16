@@ -35,3 +35,40 @@ teardown() {
     userExists "$USER" && data=1 || data=0
     [ "$data" = "1" ]   
 }
+
+@test "askUser" {
+    local USER_INPUT=""
+    askUser "testPrompt" "USER_INPUT" <<< "hello"
+    [ "$USER_INPUT" = "hello" ]
+    USER_INPUT=""
+    askUser "testPrompt" "USER_INPUT" "GoodBye" <<< ""
+    [ "$USER_INPUT" = "GoodBye" ]
+}
+
+@test "groupExists" {
+    run groupExists noGroup
+    [ "$status" = "1" ] 
+    [ "$output" = "" ] 
+    run groupExists root
+    [ "$status" = "0" ] 
+    [ "$output" = "" ] 
+}
+
+@test "User in Group" {
+    run userInGroup root root
+    [ "$status" = "0" ] 
+    [ "$output" = "" ] 
+    run userInGroup root "NotaGroup"
+    [ "$status" = "1" ] 
+    [ "$output" = "" ] 
+    run userInGroup "Notauser" root
+    [ "$status" = "1" ] 
+    echo $output
+    [ "$output" = "" ] 
+}
+
+@test "Ensure User In Group" {
+    run ensureUserInGroup root root
+    [ "$status" = "0" ] 
+    [ "$output" = "" ] 
+}
