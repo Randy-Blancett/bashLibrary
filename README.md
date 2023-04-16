@@ -41,6 +41,11 @@ Add the below to your Pom File this will copy the library files into the /target
  * Updated Documentation
  * Added ShUnit for testing / code quality
  * Added Ability to load properties (properties.sh)
+ * Add Feature to ensure User Exists
+ * Add Function to create a user if they don't exist.
+ * Added Defult option when asking for user input.
+ * 
+
 
 ### 1.1.0
 ### 11NOV2021
