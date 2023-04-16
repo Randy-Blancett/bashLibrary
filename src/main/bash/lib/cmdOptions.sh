@@ -115,7 +115,7 @@ if [[ " ${LOADED_LIB[*]} " != *" cmdOptions.sh "* ]]; then
             OUTPUT+="${CMD[0]}"
             [ "${CMD[1]}" = true ] && OUTPUT+=":"
         done
-        echo $OUTPUT
+        echo "$OUTPUT"
     }
 
     #METHOD
