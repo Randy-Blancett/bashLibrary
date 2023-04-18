@@ -37,6 +37,7 @@ Add the below to your Pom File this will copy the library files into the /target
       
 ## Versions
 ### 1.2.0
+### 17APR2023
 #### Features
  * Updated Documentation
  * Added ShUnit for testing / code quality
@@ -44,8 +45,6 @@ Add the below to your Pom File this will copy the library files into the /target
  * Add Feature to ensure User Exists
  * Add Function to create a user if they don't exist.
  * Added Defult option when asking for user input.
- * 
-
 
 ### 1.1.0
 ### 11NOV2021
