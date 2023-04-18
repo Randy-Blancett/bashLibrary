@@ -37,10 +37,14 @@ Add the below to your Pom File this will copy the library files into the /target
       
 ## Versions
 ### 1.2.0
+### 17APR2023
 #### Features
  * Updated Documentation
  * Added ShUnit for testing / code quality
  * Added Ability to load properties (properties.sh)
+ * Add Feature to ensure User Exists
+ * Add Function to create a user if they don't exist.
+ * Added Defult option when asking for user input.
 
 ### 1.1.0
 ### 11NOV2021
@@ -54,3 +58,43 @@ Add the below to your Pom File this will copy the library files into the /target
 #### Features
 Initial release
 #### Bugs
+
+# Developer Setup
+## Setup PGP Signature
+1) Install GnuPG
+    1. ``` shell
+        sudo apt install gnupg
+        ```
+2) Generate a Key
+    * ``` shell
+      gpg --gen-key
+      ```
+3) get Key ID
+    * ``` shell
+      gpg --list-keys
+      ```
+4) Publish Key
+    ``` shell
+      gpg --keyserver keyserver.ubuntu.com --send-keys [Key_ID]
+    ```
+    * **Key_ID example**: 9ECA6B4E800185C352F771389E6573430496E4EC
+## Release Artifact
+1) Cut Release
+    * ``` shell
+       mvn release:prepare
+       mvn release:perform
+      ```
+
+## Deployment Info
+**Repository URL**: 'https://oss.sonatype.org/#welcome'
+
+## Setup Local Settings
+1) Need to add connection information to '~/.m2/Settings.xml'
+2) Add
+    ``` xml
+    <server>
+      <id>ossrh</id>
+      <username>UserName</username>
+      <password>Password</password>
+    </server>
+    ```
