@@ -5,6 +5,10 @@
 #VERSION 1.1.0
 # This library adds the ability to add color to your log messages
 #VERSIONS
+#V 1.3.0
+#RELEASE ???
+# Add Default Color to logging
+#
 #V 1.1.0
 #RELEASE 11NOV2021
 # Updated code to use ShellCheck suggested conventions
@@ -82,8 +86,13 @@ if [[ " ${LOADED_LIB[*]} " != *" colorLogging.sh "* ]]; then
     # log "This Message" $STANDARD $TEXT_RED
     function log() {
         if [ "$2" -le "$VERBOSE" ]; then
-            if [[ "ENABLE_COLOR" -eq 1 ]] && [[ -n "$3" ]]; then
-                echo -e "\e[${3}m${1}\e[0m"
+            if [[ "ENABLE_COLOR" -eq 1 ]] ; then
+                if [[ -n "$3" ]];
+                then
+                    echo -e "\e[${3}m${1}\e[0m"
+                else
+                    echo -e "$1"
+                fi
             else
                 echo -e "$1"
             fi
