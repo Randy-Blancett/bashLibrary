@@ -2,7 +2,7 @@
 #FILE
 #AUTHOR Randy Blancett
 #AUTHOR_EMAIL Randy.Blancett@gmail.com
-#VERSION 1.1.0
+#VERSION 1.3.0
 # This library adds the ability to add color to your log messages
 #VERSIONS
 #V 1.3.0
@@ -30,7 +30,7 @@ if [[ " ${LOADED_LIB[*]} " != *" colorLogging.sh "* ]]; then
     #GROUP colorLogging
     # This variable turns on/off color logging 1 = on 0 = off
     ENABLE_COLOR=1
-
+    
     #CONSTANT
     #PUBLIC
     #GROUP Text Colors
@@ -73,6 +73,42 @@ if [[ " ${LOADED_LIB[*]} " != *" colorLogging.sh "* ]]; then
     # Sets text to light blue.
     TEXT_LIGHT_BLUE=94
 
+    #VARIABLE
+    #PROTECTED
+    #GROUP DefautlColors
+    # This variable sets the default color for Log Statements at the Error Level
+    LOG_DEFAULT_COLOR_ERROR=${TEXT_RED}
+
+    #VARIABLE
+    #PROTECTED
+    #GROUP DefautlColors
+    # This variable sets the default color for Log Statements at the Standard Level
+    LOG_DEFAULT_COLOR_STANDARD=${TEXT_GREEN}
+
+    #VARIABLE
+    #PROTECTED
+    #GROUP DefautlColors
+    # This variable sets the default color for Log Statements at the Info Level
+    LOG_DEFAULT_COLOR_INFO=${TEXT_BLUE}
+
+    #VARIABLE
+    #PROTECTED
+    #GROUP DefautlColors
+    # This variable sets the default color for Log Statements at the Debug Level
+    LOG_DEFAULT_COLOR_DEBUG=${TEXT_CYAN}
+
+    #VARIABLE
+    #PROTECTED
+    #GROUP DefautlColors
+    # This variable sets the default color for Log Statements at the Trace Level
+    LOG_DEFAULT_COLOR_TRACE=${TEXT_YELLOW}
+
+    #VARIABLE
+    #PROTECTED
+    #GROUP DefautlColors
+    # This variable sets the default color for Log Statements at the OMG Level
+    LOG_DEFAULT_COLOR_OMG=${TEXT_MAGENTA}
+
     #METHOD
     #PUBLIC
     # Log information to the screen if it is Equal to or less than the current verbosity level.
@@ -83,16 +119,44 @@ if [[ " ${LOADED_LIB[*]} " != *" colorLogging.sh "* ]]; then
     # $3 | Text Color | Color of the text (if enabled)
     #
     #EXAMPLES
-    # log "This Message" $STANDARD $TEXT_RED
+    # log "This Message" "${STANDARD}" "${TEXT_RED}"
     function log() {
         if [ "$2" -le "$VERBOSE" ]; then
             if [[ "ENABLE_COLOR" -eq 1 ]] ; then
-                if [[ -n "$3" ]];
+                local COLOR="${3}"
+                if [[ -z "${COLOR}" ]];
                 then
-                    echo -e "\e[${3}m${1}\e[0m"
-                else
-                    echo -e "$1"
+                    case "$2" in
+                    "${ERROR}")
+                        COLOR="${LOG_DEFAULT_COLOR_ERROR}"
+                        ;;
+
+                    "${STANDARD}")
+                        COLOR="${LOG_DEFAULT_COLOR_STANDARD}"
+                        ;;
+
+                    "${INFO}")
+                        COLOR="${LOG_DEFAULT_COLOR_INFO}"
+                        ;;
+
+                    "${DEBUG}")
+                        COLOR="${LOG_DEFAULT_COLOR_DEBUG}"
+                        ;;
+
+                    "${TRACE}")
+                        COLOR="${LOG_DEFAULT_COLOR_TRACE}"
+                        ;;
+
+                    "${OMG}")
+                        COLOR="${LOG_DEFAULT_COLOR_OMG}"
+                        ;;
+
+                    *)
+                        COLOR=$TEXT_MAGENTA
+                        ;;
+                    esac
                 fi
+                echo -e "\e[${COLOR}m${1}\e[0m"
             else
                 echo -e "$1"
             fi
@@ -121,6 +185,12 @@ if [[ " ${LOADED_LIB[*]} " != *" colorLogging.sh "* ]]; then
     # Library Setup                                              #
     ##############################################################
     addVar2Dump "ENABLE_COLOR"
+    addVar2Dump "LOG_DEFAULT_COLOR_ERROR"
+    addVar2Dump "LOG_DEFAULT_COLOR_STANDARD"
+    addVar2Dump "LOG_DEFAULT_COLOR_INFO"
+    addVar2Dump "LOG_DEFAULT_COLOR_DEBUG"
+    addVar2Dump "LOG_DEFAULT_COLOR_TRACE"
+    addVar2Dump "LOG_DEFAULT_COLOR_OMG"
 
     addCommandLineArg "" "noColor" false "If this flag is set color logging will be disabled"
 

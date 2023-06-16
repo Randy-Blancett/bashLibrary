@@ -18,6 +18,5 @@ do
 	echo "*****************************************"
 	${bats} $TEST
     [[ "$?" > "0" ]] && EXIT_CODE=1;
-	echo status: $?
 done
 exit $EXIT_CODE

@@ -12,20 +12,28 @@ setup() {
         [ "$output" = "" ]
         VERBOSE=$LEVEL
         run log "$LEVEL" $LEVEL
-        [ "$output" = "$LEVEL" ]
+        assert_output  --partial "$LEVEL"
     done
 
     [ "$VERBOSE" = "$OMG" ]
     run log "ERROR" $ERROR
-    [ "$output" = "ERROR" ]
+    assert_output  --partial "ERROR"
+    assert_output  --partial "$LOG_DEFAULT_COLOR_ERROR"
     run log "STANDARD" $STANDARD
-    [ "$output" = "STANDARD" ]
+    assert_output  --partial "STANDARD"
+    assert_output  --partial "$LOG_DEFAULT_COLOR_STANDARD"
     run log "INFO" $INFO
-    [ "$output" = "INFO" ]
+    assert_output  --partial "INFO"
+    assert_output  --partial "$LOG_DEFAULT_COLOR_INFO"
     run log "DEBUG" $DEBUG
-    [ "$output" = "DEBUG" ]
+    assert_output  --partial "DEBUG"
+    assert_output  --partial "$LOG_DEFAULT_COLOR_DEBUG"
     run log "TRACE" $TRACE
-    [ "$output" = "TRACE" ]
+    assert_output  --partial "TRACE"
+    assert_output  --partial "$LOG_DEFAULT_COLOR_TRACE"
+    run log "OMG" $OMG
+    assert_output  --partial "OMG"
+    assert_output  --partial "$LOG_DEFAULT_COLOR_OMG"
 }
 
 @test "Test Log Levels With Color" {
@@ -37,7 +45,7 @@ setup() {
         VERBOSE=$LEVEL
         run log "$LEVEL" "$LEVEL" "$TEXT_RED"
         assert_output --partial "$LEVEL"
-        assert_output --partial "0m"
+        assert_output --partial "${TEXT_RED}"
     done
 
     [ "$VERBOSE" = "$OMG" ]
