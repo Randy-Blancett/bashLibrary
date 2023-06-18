@@ -46,8 +46,10 @@
   </distributionManagement>
   <properties>
     <bats>${bats.dir}/bin/bats</bats>
-    <bats.dir>${project.basedir}/target/bats-core</bats.dir>
-    <bats.zip.name>bats-core.tar.gz</bats.zip.name>
+    <bats.assert.zip.name>bats-assert.tar.gz</bats.assert.zip.name>
+    <bats.core.zip.name>bats-core.tar.gz</bats.core.zip.name>
+    <bats.dir>${project.basedir}/target/bats</bats.dir>
+    <bats.support.zip.name>bats-support.tar.gz</bats.support.zip.name>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <maven.plugin.version>3.2.0</maven.plugin.version>
@@ -211,9 +213,35 @@
             </goals>
             <phase>process-test-resources</phase>
             <configuration>
-              <url>https://github.com/bats-core/bats-core/archive/refs/tags/v1.5.0.tar.gz</url>
+              <url>https://github.com/bats-core/bats-core/archive/refs/tags/v1.9.0.tar.gz</url>
               <unpack>false</unpack>
-              <outputFileName>${bats.zip.name}</outputFileName>
+              <outputFileName>${bats.core.zip.name}</outputFileName>
+              <outputDirectory>${project.basedir}/target/</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install Bats-Assert</id>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <phase>process-test-resources</phase>
+            <configuration>
+              <url>https://codeload.github.com/bats-core/bats-assert/tar.gz/refs/tags/v2.1.0</url>
+              <unpack>false</unpack>
+              <outputFileName>${bats.assert.zip.name}</outputFileName>
+              <outputDirectory>${project.basedir}/target/</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install Bats-Support</id>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <phase>process-test-resources</phase>
+            <configuration>
+              <url>https://codeload.github.com/bats-core/bats-support/tar.gz/refs/tags/v0.3.0</url>
+              <unpack>false</unpack>
+              <outputFileName>${bats.support.zip.name}</outputFileName>
               <outputDirectory>${project.basedir}/target/</outputDirectory>
             </configuration>
           </execution>
