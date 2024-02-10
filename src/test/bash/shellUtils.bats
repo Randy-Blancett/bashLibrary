@@ -1,4 +1,6 @@
 setup() {
+    load '../bats/TestHelper/bats-support/load'
+    load '../bats/TestHelper/bats-assert/load'
 	TMP_TEST_DIR=$(mktemp -d "/tmp/ShellUtils.XXXXXXXXX")
 	source "$LIB_PATH/shellUtils.sh"
 }
@@ -71,4 +73,10 @@ teardown() {
     run ensureUserInGroup root root
     [ "$status" = "0" ] 
     [ "$output" = "" ] 
+}
+
+@test "Ensure Root" {
+    run ensureRoot
+    assert_output  --partial "This script requires root privleges please rerun as root"
+    [ "$status" = "1" ] 
 }

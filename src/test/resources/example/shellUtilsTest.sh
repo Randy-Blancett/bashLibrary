@@ -26,4 +26,5 @@ userInGroup "root" "root" && echo "Is a member" || echo " Is not a member"
 userInGroup "darkowl" "root" && echo "Is a member" || echo " Is not a member"
 echo ""
 ensureUserInGroup "root" "root"
+echo Ensure Root
 ensureRoot
