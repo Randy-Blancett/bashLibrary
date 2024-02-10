@@ -213,7 +213,7 @@
             </goals>
             <phase>process-test-resources</phase>
             <configuration>
-              <url>https://github.com/bats-core/bats-core/archive/refs/tags/v1.9.0.tar.gz</url>
+              <url>https://github.com/bats-core/bats-core/archive/refs/tags/v1.10.0.tar.gz</url>
               <unpack>false</unpack>
               <outputFileName>${bats.core.zip.name}</outputFileName>
               <outputDirectory>${project.basedir}/target/</outputDirectory>

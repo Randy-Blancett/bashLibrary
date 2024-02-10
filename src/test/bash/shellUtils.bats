@@ -26,7 +26,8 @@ teardown() {
 }
 
 @test "copyDir No Source" {
-     run -1 copyDir "$TMP_TEST_DIR/dir1" "$TMP_TEST_DIR/dir2"    
+    bats_require_minimum_version 1.5.0
+    run -1 copyDir "$TMP_TEST_DIR/dir1" "$TMP_TEST_DIR/dir2"    
     [ ! -d "$TMP_TEST_DIR/dir2" ]  
 }
 
@@ -47,6 +48,15 @@ teardown() {
     [ "$USER_INPUT" = "GoodBye" ]
 }
 
+@test "askUserSecret" {
+    local USER_INPUT=""
+    askUserSecret "testPrompt" "USER_INPUT" <<< "hello"
+    [ "$USER_INPUT" = "hello" ]
+    USER_INPUT=""
+    askUserSecret "testPrompt" "USER_INPUT" <<< ""
+    [ "$USER_INPUT" = "" ]
+}
+
 @test "groupExists" {
     run groupExists noGroup
     [ "$status" = "1" ] 
@@ -65,7 +75,6 @@ teardown() {
     [ "$output" = "" ] 
     run userInGroup "Notauser" root
     [ "$status" = "1" ] 
-    echo $output
     [ "$output" = "" ] 
 }
 
