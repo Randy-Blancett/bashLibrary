@@ -99,7 +99,7 @@ Initial release
 **Repository URL**: 'https://oss.sonatype.org/#welcome'
 
 ## Setup Local Settings
-1) Need to add connection information to '~/.m2/Settings.xml'
+1) Need to add connection information to __~/.m2/settings.xml__
 2) Add
     ``` xml
     <server>
