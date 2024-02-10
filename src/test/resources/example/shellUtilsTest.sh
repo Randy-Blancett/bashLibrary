@@ -15,6 +15,11 @@ USER_INPUT=""
 askUser "Test Prompt" "USER_INPUT" "Default Data"
 log "User Said: ${USER_INPUT}" "${STANDARD}"
 
+USER_INPUT=""
+askUserSecret "Tell Me a Secret" "USER_INPUT" 
+log "User Said: ${USER_INPUT}" "${STANDARD}"
+
+
 isRoot && echo "Am Root" || echo "Not Root"
 ensureUser "darkowl1234"
 

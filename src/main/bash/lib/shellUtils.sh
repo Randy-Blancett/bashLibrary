@@ -109,6 +109,23 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 
 	#METHOD
 	#PUBLIC
+	# Ask User for secret input this will not show what the user is typeing
+	#
+	#PARAMETERS
+	# $1 | Prompt | The prompt to place on the screen
+	# $2 | Variable | The name of the variable to store the response
+	function askUserSecret {
+		local PROMPT
+		PROMPT="$1"
+		
+		log "Asking the user [$PROMPT] as a secret and storing it in [$2]" "$INFO" "$TEXT_YELLOW"
+		local RESPONSE
+		read -s -r -p "$PROMPT: " "RESPONSE"
+		printf -v "$2" '%s' "${RESPONSE:-$3}"
+	}
+
+	#METHOD
+	#PUBLIC
 	# Check if user Exists
 	#
 	#PARAMETERS
