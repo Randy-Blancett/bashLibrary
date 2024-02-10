@@ -37,9 +37,14 @@ Add the below to your Pom File this will copy the library files into the /target
       
 ## Versions
 ### 1.3.0
-### ??????
+### 10FEB2023
 #### Features
- * 
+ * Added the ability to ask a user for input with out showing what has been typed
+   * shellUtils: askUserSecret
+ * Added the ability to set a default color per log type
+#### Bug Fixes
+  * shellUtils: ensureRoot would output an error message but not return 1 as exit code
+    * This has been fixed
 
 ### 1.2.0
 ### 17APR2023
