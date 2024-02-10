@@ -120,7 +120,7 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 		
 		log "Asking the user [$PROMPT] as a secret and storing it in [$2]" "$INFO" "$TEXT_YELLOW"
 		local RESPONSE
-		read -s -p "$PROMPT: " "RESPONSE"
+		read -s -r -p "$PROMPT: " "RESPONSE"
 		printf -v "$2" '%s' "${RESPONSE:-$3}"
 	}
 
