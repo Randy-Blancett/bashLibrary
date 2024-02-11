@@ -98,6 +98,17 @@ Initial release
 ## Deployment Info
 **Repository URL**: 'https://oss.sonatype.org/#welcome'
 
+## Deploy Artifact to Maven Central
+1) Log in to nexus at **https://s01.oss.sonatype.org/#welcome**
+2) Go to **Stagin Repositoryies** on the left under __Build Promotion__
+3) Select the repository there and click the **Close** button across the top.
+4) Wait for the process to finish
+   * This may take several minutes
+   * When it is finished it will the status of the repository will be __closed__
+5) Select the repository and click **Release** form the top menu
+   * This May take some time.
+6) Eventually the version should show up on **https://central.sonatype.com**
+
 ## Setup Local Settings
 1) Need to add connection information to __~/.m2/settings.xml__
 2) Add
