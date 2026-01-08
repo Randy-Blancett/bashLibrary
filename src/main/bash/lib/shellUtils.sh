@@ -5,8 +5,11 @@
 #VERSION 1.1.0
 # This Library will add functions commonly used in shell scripts
 #VERSIONS
+#V 1.3.0
+# Added function to select how to install a system package
+#VERSIONS
 #V 1.2.0
-#RELEASE 
+#RELEASE 15JUN2023
 # Added Ability to check if username exists
 # Added Ability to check if Group Exists
 # Added Ability to check for root with out exiting program
@@ -137,6 +140,36 @@ if [[ " ${LOADED_LIB[*]} " != *" shellUtils.sh "* ]]; then
 	function userExists {
 		log "Check if $1 exists" "$DEBUG" 
 		id "$1" &>/dev/null && return 0 || return 1
+	}
+
+	#METHOD
+	#PUBLIC
+	# Install a system Package depending on what package manager is available
+	#
+	#PARAMETERS
+	# $1 | Package | Name of the package to install
+	#
+	#EXIT_CODES
+	# 0 | Install ran
+	# 1 | Unable to find package manager
+	function installPackage {
+		local PACKAGE=${1}
+		log "Atempting to install ${PACKAGE}" "$INFO" 
+
+		if command -v apt-get >/dev/null; then
+			log " - Using apt for install" "$DEBUG" 
+			apt install "${PACKAGE}"
+		elif command -v dnf >/dev/null; then
+			log " - Using dnf for install" "$DEBUG" 
+			dnf install "${PACKAGE}"
+		elif command -v yum >/dev/null; then
+			log " - Using yum for install" "$DEBUG" 
+			yum install "${PACKAGE}"
+		else
+			log " - Using apt for install" "$ERROR" 
+			return 1
+		fi
+		return 0
 	}
 
 	#METHOD
